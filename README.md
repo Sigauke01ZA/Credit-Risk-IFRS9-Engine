@@ -3,6 +3,9 @@ End-to-end Lending Club PD &amp; ECL model with Streamlit deployment.
 
 # IFRS 9 Credit Risk & Expected Credit Loss (ECL) Engine
 
+![Streamlit Dashboard](dashboard_PD&ECL.png)
+![Streamlit Dashboard](dashboard_calibration.png)
+
 ## Project Overview
 This repository contains an end-to-end quantitative credit risk pipeline built on the Lending Club dataset (2007–2018). The objective was to build a Probability of Default (PD) model, calculate Expected Credit Loss (ECL) under IFRS 9, and conduct macroeconomic stress testing.
 
