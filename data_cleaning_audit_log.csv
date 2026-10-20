@@ -1,0 +1,6 @@
+Step,Action,Rows_Affected,Reason
+Initial Loaded Sample,None,150000,Baseline
+String Parsing,Transformed,150000,"Converted '36 months' to 36, '13.5%' to 13.5, and '10+ years' to 10."
+Missing DTI/Util/Inquiries,Dropped,150,Missing critical credit data (<0.1% of data).
+Missing Emp Length,Imputed,8741,Imputed with median (6.0 years) to avoid losing 6% of data.
+Drop Columns,Dropped Columns,0,Target leakage (loan_status) and time-based columns removed.
