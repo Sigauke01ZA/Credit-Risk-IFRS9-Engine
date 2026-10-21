@@ -1,30 +1,40 @@
 # Credit-Risk-IFRS9-Engine
 End-to-end Lending Club PD &amp; ECL model with Streamlit deployment.
 
-# IFRS 9 Credit Risk & Expected Credit Loss (ECL) Engine
+# Lending Club IFRS 9 Engine (Cross-Sectional)
 
-![Streamlit Dashboard](dashboard_PD&ECL.png)
-![Streamlit Dashboard](dashboard_calibration.png)
+## Overview
+This repository contains an end-to-end quantitative credit risk model built on a 1.34M loan dataset (Lending Club, 2007–2018). It demonstrates Probability of Default (PD) modeling, model calibration, LGD estimation, and Expected Credit Loss (ECL) calculations. 
 
-## Project Overview
-This repository contains an end-to-end quantitative credit risk pipeline built on the Lending Club dataset (2007–2018). The objective was to build a Probability of Default (PD) model, calculate Expected Credit Loss (ECL) under IFRS 9, and conduct macroeconomic stress testing.
+The full end-to-end data pipeline and modeling process can be found in `Lending_Club_IFRS9_Model.ipynb`.
 
-### Key Features
-- **Data Engineering:** Extracted a 150,000-loan stratified sample from 1.34M loans, preserving the exact historical bad rate (20.15%). Built a documented data cleaning audit trail.
-- **EDA & Vintage Analysis:** Visualized the correlation between origination volume spikes (2015) and subsequent default rate increases. 
-- **PD Modeling:** 
-  - *Champion Model:* Logistic Regression (Gini: 0.4058).
-  - *Challenger Model:* XGBoost (Gini: 0.4153).
-- **Model Calibration:** Applied Platt Scaling to align predicted PDs with actual default rates, correcting over-provisioning in the ECL engine.
-- **LGD Estimation:** Calculated historical unsecured LGD at 93.72%.
-- **Stress Testing:** Built a 3-tier macroeconomic sensitivity engine (0.5x to 2.5x PD shocks) demonstrating non-linear ECL impacts during recessions.
-- **Deployment:** Built an interactive Streamlit app for real-time borrower scoring.
-
-## Interactive Web App
-To run the Streamlit dashboard locally:
+## How to Run the Dashboard
+To run the interactive Streamlit dashboard locally:
 1. Ensure `xgboost`, `streamlit`, `pandas`, and `joblib` are installed.
-2. Run: `streamlit run app.py`
+2. Run: `streamlit run app1.py`
 
-## Author
-**Raymond Sibanda** | [LinkedIn](https://www.linkedin.com/in/raymond-sibanda)
-FRM | BSc Mathematics
+---
+
+## Key Features
+*   **Data Engineering & Audit Trail:** Extracted a 150,000-loan stratified sample to preserve historical vintage bad rates. A full data cleaning audit trail is available in `data_cleaning_audit_log.csv`.
+*   **Modeling:** Trained a Champion Logistic Regression and an XGBoost Challenger. 
+*   **Calibration:** Applied Platt Scaling to align predicted PDs with actual default rates, fixing the over-provisioning issue caused by class weights.
+*   **LGD Estimation:** Calculated historical unsecured LGD at 93.7%.
+*   **Stress Testing:** Built a macroeconomic sensitivity engine (0.5x to 2.5x PD shocks).
+
+## Model Calibration & Validation
+![Calibration Curve](dashboard_calibration.png)
+*Figure 1: Calibration Curve (Platt Scaling). Proves the predicted PDs align perfectly with actual default rates across all risk deciles.*
+
+## Interactive Dashboard: `app1.py`
+
+**1. Prime Borrower Scenario (Low Risk)**
+![Streamlit Lending Club](streamlit_lending_club.png)
+
+**2. Risky Borrower Scenario (High Risk)**
+By adjusting the borrower profile to a subprime FICO score (580), high DTI (45%), and a history of delinquencies, the model dynamically recalculates the Probability of Default and Expected Credit Loss, demonstrating its sensitivity to borrower credit behaviour.
+![Streamlit Lending Club Risky](streamlit_lending_club_risky.png)
+
+---
+**Author:** Raymond Sibanda | [LinkedIn](https://www.linkedin.com/in/raymond-sibanda)
+FRM | BSc Mathematics | BCom Honours
